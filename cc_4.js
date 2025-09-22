@@ -95,3 +95,24 @@ for (const p of products) {
   console.log(`${p.name}: ${p.inventory} left`);
 }
 
+// -----------------------------
+// Step 6: for...in — log keys/values for one product (post-discounts)
+// -----------------------------
+console.log("\n=== Step 6: for...in on a single product ===");
+const sample = products[0];
+for (const key in sample) { // for...in over object keys
+  console.log(`${key}: ${sample[key]}`);
+}
+
+// -----------------------------
+// Step 7: Object.entries() + destructuring — log all product info
+// (practice iteration tools; no logic changes here)
+// -----------------------------
+console.log("\n=== Step 7: Object.entries() + destructuring on all products ===");
+for (const p of products) {
+  const { name, category, price, inventory } = p; // destructuring
+  console.log(`${name} [${category}] — $${price.toFixed(2)} | stock ${inventory}`);
+  Object.entries(p).forEach(([k, v]) => console.log(`  ${k} => ${v}`));
+}
+
+console.log("\nDone. Open DevTools ➜ Console to review all outputs.");
