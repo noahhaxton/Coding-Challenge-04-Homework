@@ -64,3 +64,34 @@ function setExtraDiscount(type) {
   }
 }
 
+// -----------------------------
+// Step 5: Checkout Loop & Inventory Update
+// Loop 3 customers. Inside each iteration:
+// - subtotal = 0 (reset inside loop)
+// - for...of over products: add price to subtotal and decrement inventory by 1 if available
+// - apply extraDiscount to subtotal
+// - log customer number and total
+// -----------------------------
+const demoTypes = ["regular", "student", "senior"]; // rotate to show each case
+
+console.log("\n=== Step 5: Checkout Simulation (3 customers) ===");
+for (let i = 1; i <= 3; i++) { // standard for loop over customers
+  setExtraDiscount(demoTypes[(i - 1) % demoTypes.length]);
+
+  let subtotal = 0; // reset inside loop
+  for (const item of products) { // for...of over products
+    if (item.inventory > 0) {
+      subtotal += item.price;
+      item.inventory--; // inventory persists across customers
+    }
+  }
+
+  const finalTotal = +(subtotal * (1 - extraDiscount)).toFixed(2);
+  console.log(`Customer ${i} (${customerType}) — Subtotal $${subtotal.toFixed(2)} | Extra ${(extraDiscount*100).toFixed(0)}% | TOTAL $${finalTotal.toFixed(2)}`);
+}
+
+console.log("\nInventory after checkout:");
+for (const p of products) {
+  console.log(`${p.name}: ${p.inventory} left`);
+}
+
