@@ -44,3 +44,23 @@ console.log("=== Step 3: After Category Discounts (prices updated in place) ==="
 for (const item of products) {
   console.log(`${item.name} [${item.category}] — $${item.price.toFixed(2)} | stock ${item.inventory}`);
 }
+
+// -----------------------------
+// Step 4: Customer Type Discount with if / else if
+// (applied to subtotal at checkout ONLY; not to individual product prices)
+// -----------------------------
+let customerType = "regular"; // "regular" | "student" | "senior"
+let extraDiscount = 0;
+
+function setExtraDiscount(type) {
+  customerType = type;
+  extraDiscount = 0;                 // start at 0
+  if (customerType === "student") {  // 5%
+    extraDiscount = 0.05;
+  } else if (customerType === "senior") { // 7%
+    extraDiscount = 0.07;
+  } else {
+    extraDiscount = 0;               // everyone else
+  }
+}
+
